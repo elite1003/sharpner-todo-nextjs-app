@@ -1,9 +1,9 @@
 import React from "react";
-import Todo from "@/components/Todo/Todo";
+import TodoCompleted from "@/components/Todo/TodoCompleted";
 import { MongoClient } from "mongodb";
 
-export default function HomePage({ todos }) {
-  return <Todo todos={todos} />;
+export default function TodoCompletedPage({ todos }) {
+  return <TodoCompleted todos={todos} />;
 }
 
 export async function getStaticProps() {
@@ -12,7 +12,7 @@ export async function getStaticProps() {
   );
   const db = client.db();
   const todosCollection = db.collection("todos");
-  const todos = await todosCollection.find({ isCompleted: false }).toArray();
+  const todos = await todosCollection.find({ isCompleted: true }).toArray();
   client.close();
 
   return {
